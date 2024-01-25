@@ -12,9 +12,11 @@ import java.util.Objects;
 public class ChessPiece {
     private ChessGame.TeamColor pieceColor;
     private PieceType type;
+    private PieceMoveCalculator calculator;
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
         this.pieceColor = pieceColor;
         this.type = type;
+        this.calculator = createMoveCalculator(type);
     }
 
     /**
@@ -51,7 +53,18 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+        return calculator.calculateMoves(board, myPosition);
+    }
+    private PieceMoveCalculator createMoveCalculator(PieceType type){
+        return switch (type) {
+            case KING -> new KingMoveCalculator();
+            case QUEEN -> new QueenMoveCalculator();
+            case BISHOP -> new BishopMoveCalculator();
+            case KNIGHT -> new KnightMoveCalculator();
+            case ROOK -> new RookMoveCalculator();
+            case PAWN -> new PawnMoveCalculator();
+            default -> throw new IllegalArgumentException("Invalid piece type :(");
+        };
     }
     @Override
     public boolean equals(Object o) {
