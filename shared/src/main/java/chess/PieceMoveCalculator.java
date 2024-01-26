@@ -4,8 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
+/**
+ *
+ * PieceMoveCalculator is an interface to implement move calculators for each piece type
+ *
+ *
+ * **/
 public interface PieceMoveCalculator {
     Collection<ChessMove> calculateMoves(ChessBoard board, ChessPosition myPosition);
+    /**
+     * checks if a move is valid and sets the capture flag when the move is a capture
+     * @param board a chessboard object
+     * @param move the move to test
+     *
+     * **/
     default boolean checkMove(ChessBoard board, ChessMove move) {
         if(isOnBoard(board, move.getEndPosition()) &&
                 checkColor(board, move.getStartPosition()) != checkColor(board, move.getEndPosition())) {
@@ -15,6 +27,7 @@ public interface PieceMoveCalculator {
         }
         return false;
     }
+
     private void setCapture(ChessBoard board, ChessMove move) {
         if(checkColor(board, move.getStartPosition()) == ChessGame.TeamColor.WHITE && checkColor(board, move.getEndPosition()) == ChessGame.TeamColor.BLACK){
             move.setCapture();
@@ -25,6 +38,12 @@ public interface PieceMoveCalculator {
     private boolean isOnBoard(ChessBoard board, ChessPosition checkPosition){
         return board.isValidPosition(checkPosition);
     }
+    /**
+     * checks if there is a piece at a coordinate and if so what color
+     * @param board a chessboard object
+     * @param checkPosition the position to check
+     *
+     * **/
     default ChessGame.TeamColor checkColor(ChessBoard board, ChessPosition checkPosition) {
         ChessPiece checkPiece = board.getPiece(checkPosition);
         if(checkPiece == null) {
