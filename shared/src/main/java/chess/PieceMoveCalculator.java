@@ -67,14 +67,12 @@ class QueenMoveCalculator implements PieceMoveCalculator{
         int[][] iteratorPairs = {{1,1},{-1,-1},{1,-1},{-1,1},{1,0},{-1,0},{0,1},{0,-1}};
 
         for(int[] iteratorPair : iteratorPairs) {
-            System.out.println(iteratorPair[0] + " " + iteratorPair[1]);
             ChessPosition endPosition = new ChessPosition(myPosition.getRow() + iteratorPair[0],
                     myPosition.getColumn() + iteratorPair[1]);
 
             ChessMove move = new ChessMove(myPosition, endPosition);
             while(checkMove(board, move)) {
                 moves.add(move);
-                System.out.println(move.toString());
                 if(move.getCapture()){
                     break;
                 }
@@ -102,14 +100,12 @@ class BishopMoveCalculator implements PieceMoveCalculator{
         int[][] iteratorPairs = {{1,1},{-1,-1},{1,-1},{-1,1}};
 
         for(int[] iteratorPair : iteratorPairs) {
-            System.out.println(iteratorPair[0] + " " + iteratorPair[1]);
             ChessPosition endPosition = new ChessPosition(myPosition.getRow() + iteratorPair[0],
                     myPosition.getColumn() + iteratorPair[1]);
 
             ChessMove move = new ChessMove(myPosition, endPosition);
             while(checkMove(board, move)) {
                 moves.add(move);
-                System.out.println(move.toString());
                 if(move.getCapture()){
                     break;
                 }
@@ -135,7 +131,19 @@ class KnightMoveCalculator implements PieceMoveCalculator{
     public Collection<ChessMove> calculateMoves(ChessBoard board, ChessPosition myPosition){
         Collection<ChessMove> moves = new ArrayList<ChessMove>();
 
-        //implement logic
+        int[][] iteratorPairs = {{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{-1,2},{1,-2},{-1,-2}};
+
+        for(int[] iteratorPair : iteratorPairs) {
+            System.out.println(iteratorPair[0] + " " + iteratorPair[1]);
+            ChessPosition endPosition = new ChessPosition(myPosition.getRow() + iteratorPair[0],
+                    myPosition.getColumn() + iteratorPair[1]);
+
+            ChessMove move = new ChessMove(myPosition, endPosition);
+            if(checkMove(board, move)) {
+                moves.add(move);
+            }
+        }
+
         return moves;
     }
 }
@@ -154,14 +162,12 @@ class RookMoveCalculator implements PieceMoveCalculator{
         int[][] iteratorPairs = {{1,0},{-1,0},{0,1},{0,-1}};
 
         for(int[] iteratorPair : iteratorPairs) {
-            System.out.println(iteratorPair[0] + " " + iteratorPair[1]);
             ChessPosition endPosition = new ChessPosition(myPosition.getRow() + iteratorPair[0],
                     myPosition.getColumn() + iteratorPair[1]);
 
             ChessMove move = new ChessMove(myPosition, endPosition);
             while(checkMove(board, move)) {
                 moves.add(move);
-                System.out.println(move.toString());
                 if(move.getCapture()){
                     break;
                 }
