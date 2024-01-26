@@ -151,8 +151,26 @@ class RookMoveCalculator implements PieceMoveCalculator{
     @Override
     public Collection<ChessMove> calculateMoves(ChessBoard board, ChessPosition myPosition){
         Collection<ChessMove> moves = new ArrayList<ChessMove>();
+        int[][] iteratorPairs = {{1,0},{-1,0},{0,1},{0,-1}};
 
-        //implement logic
+        for(int[] iteratorPair : iteratorPairs) {
+            System.out.println(iteratorPair[0] + " " + iteratorPair[1]);
+            ChessPosition endPosition = new ChessPosition(myPosition.getRow() + iteratorPair[0],
+                    myPosition.getColumn() + iteratorPair[1]);
+
+            ChessMove move = new ChessMove(myPosition, endPosition);
+            while(checkMove(board, move)) {
+                moves.add(move);
+                System.out.println(move.toString());
+                if(move.getCapture()){
+                    break;
+                }
+                endPosition = new ChessPosition(endPosition.getRow() + iteratorPair[0],
+                        endPosition.getColumn() + iteratorPair[1]);
+                move = new ChessMove(myPosition, endPosition);
+            }
+        }
+
         return moves;
     }
 }
