@@ -48,7 +48,19 @@ class KingMoveCalculator implements PieceMoveCalculator{
     public Collection<ChessMove> calculateMoves(ChessBoard board, ChessPosition myPosition){
         Collection<ChessMove> moves = new ArrayList<ChessMove>();
 
-        //implement logic
+        int[][] iteratorPairs = {{1,1},{1,-1},{-1,1},{-1,-1},{0,1},{0,-1},{-1,0},{1,0}};
+
+        for(int[] iteratorPair : iteratorPairs) {
+            System.out.println(iteratorPair[0] + " " + iteratorPair[1]);
+            ChessPosition endPosition = new ChessPosition(myPosition.getRow() + iteratorPair[0],
+                    myPosition.getColumn() + iteratorPair[1]);
+
+            ChessMove move = new ChessMove(myPosition, endPosition);
+            if(checkMove(board, move)) {
+                moves.add(move);
+            }
+        }
+
         return moves;
     }
 }
