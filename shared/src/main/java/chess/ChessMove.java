@@ -12,12 +12,19 @@ public class ChessMove {
     private ChessPosition startPosition;
     private ChessPosition endPosition;
     private ChessPiece.PieceType promotionPiece;
-
+    private boolean capture;
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition,
                      ChessPiece.PieceType promotionPiece) {
         this.startPosition = startPosition;
         this.endPosition = endPosition;
         this.promotionPiece = promotionPiece;
+        this.capture = false;
+    }
+    public ChessMove(ChessPosition startPosition, ChessPosition endPosition) {
+        this.startPosition = startPosition;
+        this.endPosition = endPosition;
+        this.promotionPiece = null;
+        this.capture = false;
     }
 
     /**
@@ -61,5 +68,12 @@ public class ChessMove {
     public String toString() {
         return "start Position: "+this.startPosition.toString()+
                 "\nend Position: "+this.endPosition.toString();
+    }
+
+    public boolean getCapture() {
+        return capture;
+    }
+    public void setCapture() {
+        capture = true;
     }
 }
