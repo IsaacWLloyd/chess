@@ -9,9 +9,10 @@ import java.util.Collection;
  * signature of the existing methods.
  */
 public class ChessGame {
-
+    private ChessBoard board;
     public ChessGame() {
-
+        board = new ChessBoard();
+        board.resetBoard();
     }
 
     /**
@@ -95,6 +96,8 @@ public class ChessGame {
      *
      * @param board the new board to use
      */
+    public Collection<ChessMove> getTeamMoves(TeamColor teamColor) {throw new RuntimeException("Not implemented");}
+    public boolean isValid(ChessMove move) {throw new RuntimeException("Not implemented");}
     public void setBoard(ChessBoard board) {
         throw new RuntimeException("Not implemented");
     }
