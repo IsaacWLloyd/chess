@@ -33,6 +33,16 @@ public class ChessBoard {
             throw new IllegalArgumentException("Position is Invalid");
         }
     }
+
+    public void removePiece(ChessPosition position) {
+        int arrayRow = position.getRow()-1;
+        int arrayColumn = position.getColumn()-1;
+        if(isValidPosition(position)){
+            board[arrayRow][arrayColumn] = null;
+        }else{
+            throw new IllegalArgumentException("Position is Invalid");
+        }
+    }
     /**
      * checks if a position is right
      *
@@ -151,6 +161,10 @@ public class ChessBoard {
                 new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
         addPiece(new ChessPosition(8, 8),
                 new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+    }
+
+    public ChessPiece[][] getBoard() {
+        return board;
     }
 
     @Override
